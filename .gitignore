@@ -1,0 +1,15 @@
+/.factorypath
+/.project
+/.apt_generated
+/.apt_generated_tests
+/.gradle
+/.idea
+/.settings
+/run
+/run-test-server
+/.classpath
+/bin
+/build
+/*.iml
+/*.iws
+/*.ipr

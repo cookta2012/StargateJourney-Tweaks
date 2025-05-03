@@ -1,0 +1,29 @@
+loaderVersion = "[47,)"
+modLoader = "javafml"
+license = "${mod_license}"
+[[mods]]
+displayName="${mod_name}"
+modId = "${mod_id}"
+version = "${version}"
+description='''${mod_description}'''
+
+${mixins_block}
+
+[[sgjourney]]
+mandatory = true
+modId = "sgjourney"
+ordering = "AFTER"
+side = "BOTH"
+versionRange = "${sgjourney_version}"
+[[dependencies.${mod_id}]]
+mandatory = true
+modId = "forge"
+ordering = "NONE"
+side = "BOTH"
+versionRange = "[47,)"
+[[dependencies.${mod_id}]]
+mandatory = true
+modId = "minecraft"
+ordering = "NONE"
+side = "BOTH"
+versionRange = "${mc_version_range}"
