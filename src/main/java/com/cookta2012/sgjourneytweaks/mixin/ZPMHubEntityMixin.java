@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.cookta2012.sgjourneytweaks.config.CommonInventoryProtectionConfig;
 import com.cookta2012.sgjourneytweaks.config.CommonPermissionConfig;
-import com.cookta2012.sgjourneytweaks.mixin.utils.InvokerBlockEntityMixin;
 import com.cookta2012.sgjourneytweaks.utils.GatedItemHandler;
 
 import net.minecraft.ChatFormatting;
@@ -27,10 +26,11 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.povstalec.sgjourney.common.block_entities.ProtectedBlockEntity;
+import net.povstalec.sgjourney.common.block_entities.dhd.AbstractDHDEntity;
 import net.povstalec.sgjourney.common.block_entities.tech.ZPMHubEntity;
 
 @Mixin(ZPMHubEntity.class)
-public abstract class ZPMHubEntityMixin implements ProtectedBlockEntity, InvokerBlockEntityMixin {
+public abstract class ZPMHubEntityMixin implements ProtectedBlockEntity {
 	
 	@Shadow(remap=false) protected LazyOptional<IItemHandler> lazyItemHandler;
 	
@@ -42,6 +42,7 @@ public abstract class ZPMHubEntityMixin implements ProtectedBlockEntity, Invoker
     @Override
     public void setProtected(boolean value)
     {
+    	ZPMHubEntity self = ((ZPMHubEntity)(Object)this);
         if (this.isProtected == value)
             return;                          // no change → nothing to do
 
@@ -52,13 +53,13 @@ public abstract class ZPMHubEntityMixin implements ProtectedBlockEntity, Invoker
          *       the menu that is already open. */
 
         /* mark dirty & notify clients (unchanged) */
-        this.setChanged();
-        Level level = this.getLevel();
+        self.setChanged();
+        Level level = self.getLevel();
         if (level != null && !level.isClientSide) {
             level.sendBlockUpdated(
-                    this.getBlockPos(),
-                    this.getBlockState(),
-                    this.getBlockState(), 3);
+            		self.getBlockPos(),
+            		self.getBlockState(),
+            		self.getBlockState(), 3);
         }
     }
 

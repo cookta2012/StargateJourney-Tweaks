@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.cookta2012.sgjourneytweaks.config.CommonPermissionConfig;
-import com.cookta2012.sgjourneytweaks.mixin.utils.InvokerBlockEntityMixin;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.povstalec.sgjourney.common.block_entities.ProtectedBlockEntity;
 import net.povstalec.sgjourney.common.block_entities.tech.AbstractTransporterEntity;
 @Mixin(AbstractTransporterEntity.class)
-public abstract class AbstractTransporterEntityMixin implements ProtectedBlockEntity, InvokerBlockEntityMixin {
+public abstract class AbstractTransporterEntityMixin implements ProtectedBlockEntity {
     @Unique private boolean isProtected = false;  // your own storage
 
     @Override
@@ -26,7 +25,7 @@ public abstract class AbstractTransporterEntityMixin implements ProtectedBlockEn
         if (this.isProtected == value)
             return;                          // no change → nothing to do
         this.isProtected = value;
-        this.setChanged();
+        ((AbstractTransporterEntity)(Object)this).setChanged();
         
     }
 

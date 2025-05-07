@@ -1,3 +1,10 @@
+/*
+ * Totally not yoinked from
+ * https://github.com/Povstalec/StargateJourney/blob/stargatejourney-1.20.1/src/main/java/net/povstalec/sgjourney/common/config/StargateJourneyConfig.java
+ * Thanks Postalec (Wold)
+ * 
+ */
+
 package com.cookta2012.sgjourneytweaks.config;
 
 import net.minecraftforge.common.ForgeConfigSpec.Builder;

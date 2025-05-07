@@ -5,15 +5,14 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.cookta2012.sgjourneytweaks.mixin.utils.InvokerBlockEntityMixin;
-
 import org.spongepowered.asm.mixin.injection.At;
 
 import net.minecraft.world.level.Level;
 import net.povstalec.sgjourney.common.block_entities.dhd.AbstractDHDEntity;
+import net.povstalec.sgjourney.common.block_entities.tech.AbstractTransporterEntity;
 
 @Mixin(AbstractDHDEntity.class)
-public abstract class AbstractDHDEntityMixin implements InvokerBlockEntityMixin{
+public abstract class AbstractDHDEntityMixin {
 	
     @Shadow(remap = false) protected boolean isProtected;
     @Shadow(remap = false) public abstract void invalidateCaps();
@@ -26,6 +25,7 @@ public abstract class AbstractDHDEntityMixin implements InvokerBlockEntityMixin{
     )
     public void setProtected(boolean value, CallbackInfo ci)
     {
+    	AbstractDHDEntity self = ((AbstractDHDEntity)(Object)this);
 
         if (this.isProtected == value)
             return;                          // no change → nothing to do
@@ -37,13 +37,13 @@ public abstract class AbstractDHDEntityMixin implements InvokerBlockEntityMixin{
          *       the menu that is already open. */
 
         /* mark dirty & notify clients (unchanged) */
-        this.setChanged();
-        Level level = this.getLevel();
+        self.setChanged();
+        Level level = self.getLevel();
         if (level != null && !level.isClientSide) {
             level.sendBlockUpdated(
-                    this.getBlockPos(),
-                    this.getBlockState(),
-                    this.getBlockState(), 3);
+            		self.getBlockPos(),
+            		self.getBlockState(),
+            		self.getBlockState(), 3);
         }
         ci.cancel();
     }

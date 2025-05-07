@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "sgjourney:zpm_hub",
+    "sgjourney:milky_way_dhd",
+    "sgjourney:classic_dhd",
+    "sgjourney:pegasus_dhd"
+  ]
+}
